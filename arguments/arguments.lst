@@ -1,0 +1,36 @@
+     1                                  ;Accessing and displaying arguments
+     2                                  
+     3                                  extern printf
+     4                                  
+     5                                  section .data
+     6 00000000 54686520434C492061-     	msg db "The CLI arguments: ",10,0
+     6 00000009 7267756D656E74733A-
+     6 00000012 200A00             
+     7 00000015 25730A00                	fmt db "%s",10,0
+     8                                  section .bss
+     9                                  
+    10                                  section .text
+    11                                  	global main
+    12                                  main:
+    13 00000000 55                      	push rbp
+    14 00000001 4889E5                  	mov rbp, rsp
+    15 00000004 4989FC                  	mov r12, rdi ;number of arguments
+    16 00000007 4989F5                  	mov r13, rsi ;address of arg array
+    17                                  
+    18                                  	;print the title
+    19 0000000A 48BF-                   	mov rdi, msg
+    19 0000000C [0000000000000000] 
+    20 00000014 E8(00000000)            	call printf
+    21 00000019 41BE00000000            	mov r14, 0
+    22                                  
+    23                                  	;print the command and arguments
+    24                                  	.ploop: ;loop through the array and print
+    25 0000001F 48BF-                   		mov rdi, fmt
+    25 00000021 [1500000000000000] 
+    26 00000029 4B8B74F500              		mov rsi, qword [r13+r14*8]
+    27 0000002E E8(00000000)            		call printf
+    28 00000033 49FFC6                  		inc r14
+    29 00000036 4D39E6                  		cmp r14, r12 ;number of args reached?
+    30 00000039 7CE4                    		jl .ploop
+    31 0000003B C9                      	leave
+    32 0000003C C3                      	ret

@@ -1,0 +1,17 @@
+     1                                  section .data
+     2                                  section .bss
+     3                                  section .text
+     4                                  global asum
+     5                                  asum:
+     6                                  	section .text
+     7 00000000 4889F1                  		mov rcx, rsi ;array length
+     8 00000003 4889F3                  		mov rbx, rsi ;address of array
+     9 00000006 41BC00000000            		mov r12, 0
+    10 0000000C F2420F1004E3            		movsd xmm0, qword[rbx+r12*8]
+    11 00000012 48FFC9                  		dec rcx
+    12                                  		sloop:
+    13 00000015 49FFC4                  			inc r12
+    14 00000018 F2420F5804E3            			addsd xmm0, qword[rbx+r12*8]
+    15 0000001E E2F5                    			loop sloop
+    16 00000020 C3                      			ret
+    17                                  

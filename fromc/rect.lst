@@ -1,0 +1,24 @@
+     1                                  ;rect.asm
+     2                                  section .data
+     3                                  section .bss
+     4                                  section .text
+     5                                  
+     6                                  global rarea
+     7                                  rarea:
+     8                                  	section .text
+     9 00000000 55                      	push rbp
+    10 00000001 4889E5                  	mov rbp, rsp
+    11 00000004 4889F8                  	mov rax, rdi
+    12 00000007 48F7EE                  	imul rsi
+    13 0000000A C9                      	leave
+    14 0000000B C3                      	ret
+    15                                  
+    16                                  global rcircum
+    17                                  rcircum:
+    18 0000000C 55                      	push rbp
+    19 0000000D 4889E5                  	mov rbp, rsp
+    20 00000010 4889F8                  	mov rax, rdi
+    21 00000013 4801F0                  	add rax, rsi
+    22 00000016 486BC002                	imul rax, 2
+    23 0000001A C9                      	leave
+    24 0000001B C3                      	ret

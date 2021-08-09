@@ -1,0 +1,16 @@
+     1                                  section .data
+     2                                  section .bss
+     3                                  section .text
+     4                                  global adouble
+     5                                  adouble:
+     6                                  	section .text
+     7 00000000 4889F1                  		mov rcx, rsi
+     8 00000003 4889FB                  		mov rbx, rdi
+     9 00000006 41BC00000000            		mov r12, 0
+    10                                  		aloop:
+    11 0000000C F2420F1004E3            			movsd xmm0, qword[rbx+r12*8]
+    12 00000012 F20F58C0                			addsd xmm0, xmm0
+    13 00000016 F2420F1104E3            			movsd qword[rbx+r12*8], xmm0
+    14 0000001C 49FFC4                  			inc r12
+    15 0000001F E2EB                    			loop aloop
+    16 00000021 C3                      	ret
